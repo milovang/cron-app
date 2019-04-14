@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {% if app.request.get('job_id') %}
+        {% set reports = cronReport %}
+    {% else %}
+        {% set reports = reportsAll %}
+    {% endif %}
+
+    <div class="container-fluid">
+        <!-- Page Content -->
+        <h1>Reports</h1>
+        <hr>
+        <div class="card mb-3">
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    {% if reports %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>Job id</th>
+                                    <th>Started at</th>
+                                    <th>Time</th>
+                                    <th>Status code</th>
+                                    <th>Output</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for report in reports %}
+                                    <tr>
+                                        <td>{{ report.id }}</td>
+                                        <td>{{ report.job.id }}</td>
+                                        <td>{{ report.runAt.date|date('Y-m-d H:i:s') }}</td>
+                                        <td>{{ report.runTime }}</td>
+                                        <td>{{ report.exitCode }}</td>
+                                        <td>{{ report.output }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p class="small text-center text-muted my-5"> Sorry, there is no reports yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.content -->
+{% endblock %}

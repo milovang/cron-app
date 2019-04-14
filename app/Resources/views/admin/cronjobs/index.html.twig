@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="content">
+        <!-- Page Content -->
+        <h1>Cron jobs</h1>
+        <hr>
+
+        <div class="card mb-3">
+
+            <div class="card-body">
+                <div class="table-responsive">
+                    {% if cronJobs %}
+                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>id</th>
+                                    <th>name</th>
+                                    <th>Command</th>
+                                    <th>schedule</th>
+                                    <th>description</th>
+                                    <th>enabled</th>
+                                    <th>reports</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for cron in cronJobs %}
+                                    <tr>
+                                        <td>{{ cron.id }}</td>
+                                        <td><a href="{{ path('edit_cron_job', {'id': cron.id}) }}">{{ cron.name }}</a></td>
+                                        <td>{{ cron.command }}</td>
+                                        <td>{{ cron.schedule }}</td>
+                                        <td>{{ cron.description }}</td>
+                                        <td>{{ cron.enabled == 1 ? 'yes' : 'no' }}</td>
+                                        <td><a href="{{ path('list_cron_reports', {'job_id': cron.id}) }}">Check</a></td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <p class="small text-center text-muted my-5">Please create a new Cron job</p>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.content -->
+{% endblock %}
