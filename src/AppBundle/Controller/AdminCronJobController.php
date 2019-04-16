@@ -47,6 +47,7 @@ class AdminCronJobController extends Controller
             $entityManager->persist($job);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Job successfully created!');
             return $this->redirectToRoute('list_cron_jobs');
         }
 
@@ -73,7 +74,7 @@ class AdminCronJobController extends Controller
             $entityManager->persist($job);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Cron successfully updated!');
+            $this->addFlash('success', 'Job successfully updated!');
             return $this->redirectToRoute('list_cron_jobs');
         }
 
@@ -94,7 +95,7 @@ class AdminCronJobController extends Controller
         $entityManager->remove($cronJob);
         $entityManager->flush();
 
-        $this->addFlash('success', 'Cron successfully deleted!');
+        $this->addFlash('success', 'Job successfully deleted!');
         return $this->redirectToRoute('list_cron_jobs');
 
 

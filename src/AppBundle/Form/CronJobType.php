@@ -35,13 +35,13 @@ class CronJobType extends AbstractType
             ->add('command', TextType::class,[
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => 'rm -rf /path/to/folder/*',
+                    'placeholder' => 'app:command',
                 ]
             ])
             ->add('schedule', TextType::class,[
                 'attr' => [
                     'class' => 'form-control',
-                    'placeholder' => '*/5 * * * *',
+                    'placeholder' => '*/8 * * * *',
                 ]
             ])
             ->add('description', TextType::class,[

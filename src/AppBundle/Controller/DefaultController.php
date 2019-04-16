@@ -24,17 +24,6 @@ class DefaultController extends Controller
      */
     public function testAction(Request $request)
     {
-
-        $cron = new CronJob();
-        $cron->setName("Test 2");
-        $cron->setCommand("touch /vagrant/cron-app/web/test-file.txt");
-        $cron->setDescription("test-file.txt");
-        $cron->setSchedule("*/2 * * * *");
-        $cron->setEnabled(1);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($cron);
-        $em->flush();
         die;
     }
 }

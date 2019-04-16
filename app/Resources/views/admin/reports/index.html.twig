@@ -35,7 +35,7 @@
                                         <td>{{ report.job.id }}</td>
                                         <td>{{ report.runAt.date|date('Y-m-d H:i:s') }}</td>
                                         <td>{{ report.runTime }}</td>
-                                        <td>{{ report.exitCode }}</td>
+                                        <td>{{ report.exitCode == 0 ? "ok" : "Ops... Something went wrong, please check in logs" }}</td>
                                         <td>{{ report.output }}</td>
                                     </tr>
                                 {% endfor %}
