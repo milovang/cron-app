@@ -6,3 +6,7 @@ a.nav-link span {
     margin-left: 20px;
     margin-top: 10px;
 }
+
+.row.cards-status-row .card {
+    min-height: 90px !important;
+}

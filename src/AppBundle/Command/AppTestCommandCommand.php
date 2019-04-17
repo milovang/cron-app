@@ -26,6 +26,7 @@ class AppTestCommandCommand extends ContainerAwareCommand
     {
 
         $now = date('H-i-s');
+        //by executing this command, it will make new file in /web/examples directory
         $process = new Process("touch /vagrant/cron-app/web/examples/test-file-$now.php");
         $process->run();
 

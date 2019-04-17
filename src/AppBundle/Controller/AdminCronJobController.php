@@ -5,10 +5,8 @@ namespace AppBundle\Controller;
 use AppBundle\Form\CronJobType;
 use Cron\Cron;
 use Cron\CronBundle\Entity\CronJob;
+use Cron\CronBundle\Entity\CronReport;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,11 +17,18 @@ class AdminCronJobController extends Controller
      */
     public function indexAction(Request $request)
     {
-        //find all cron jobs
+
         $cronJobs = $this->getDoctrine()->getRepository(CronJob::class)->findAll();
+        $enabledJobs = $this->getDoctrine()->getRepository(CronJob::class)->findBy(['enabled' => 1]);
+        $disabledJobs = $this->getDoctrine()->getRepository(CronJob::class)->findBy(['enabled' => 0]);
+        $failedReports = $this->getDoctrine()->getRepository(CronReport::class)->findBy([ "exitCode" => 1 ]);
+
 
         return $this->render('admin/cronjobs/index.html.twig', [
             "cronJobs" => $cronJobs,
+            "activeJobs" => $enabledJobs,
+            "disabledJobs" => $disabledJobs,
+            "failedReports" => $failedReports,
         ]);
     }
 

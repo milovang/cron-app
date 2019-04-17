@@ -1,13 +1,59 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     <div class="content">
-        <!-- Page Content -->
-        <h1>Cron jobs</h1>
-        <hr>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="{{ path('list_cron_jobs')}}">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Overview</li>
+        </ol>
+        <div class="row cards-status-row">
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-primary o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="mr-5">Total jobs: {{ calculateArraySize(cronJobs) }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-success o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <div class="mr-5">Active jobs: {{ calculateArraySize(activeJobs) }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-warning o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fa-ban"></i>
+                        </div>
+                        <div class="mr-5">Disabled jobs: {{ calculateArraySize(disabledJobs) }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-3 col-sm-6 mb-3">
+                <div class="card text-white bg-danger o-hidden h-100">
+                    <div class="card-body">
+                        <div class="card-body-icon">
+                            <i class="fas fa-fw fa-life-ring"></i>
+                        </div>
+                        <div class="mr-5">Failed: {{ calculateArraySize(failedReports) }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="card mb-3">
-
+            <div class="card-header">Cron jobs</div>
             <div class="card-body">
                 <div class="table-responsive">
                     {% if cronJobs %}
